@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fábrica de Talentos - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .sidebar {
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+            padding: 15px;
+            height: 100%;
+            min-height: 100vh;
+        }
+        .sidebar-item {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar-item:hover, .sidebar-item.active {
+            background-color: #e9ecef;
+            color: #0d6efd;
+        }
+        .dashboard-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background-color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .dashboard-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .dashboard-card-header {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+            border-radius: 8px 8px 0 0;
+            font-weight: 500;
+        }
+        .dashboard-card-body {
+            padding: 20px;
+        }
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .progress-circle {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: conic-gradient(#0d6efd 0% 65%, #e9ecef 65% 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+        .progress-circle::before {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: white;
+        }
+        .progress-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        .recommendation-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #e9ecef;
+            border-radius: 20px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .recommendation-badge:hover {
+            background-color: #d8f3dc;
+            border-color: #28a745;
+            cursor: pointer;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .education-option {
+            border: 2px solid transparent;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            padding: 20px;
+            cursor: pointer;
+        }
+        .education-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .education-option.selected {
+            border-color: #0d6efd;
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+        .education-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-industry me-2"></i>Fábrica de Talentos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-question-circle me-1"></i> Ayuda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-bell me-1"></i> Notificaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user-circle me-1"></i> Mi Cuenta</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Primera pestaña: Personalización del perfil -->
+            <div id="profileSetup" class="tab-content active col-12 py-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 col-lg-8">
+                            <div class="card shadow border-0">
+                                <div class="card-body p-4">
+                                    <div class="text-center mb-4">
+                                        <h2 class="fw-bold"><i class="fas fa-sliders-h me-2 text-primary"></i>Personalización de tu Perfil</h2>
+                                        <p class="text-muted">Configura tu perfil para encontrar las mejores oportunidades</p>
+                                    </div>
+                                    
+                                    <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+                                        <i class="fas fa-info-circle me-3 fs-4"></i>
+                                        <div>Para ofrecerte las mejores oportunidades, personaliza tu perfil seleccionando tu nivel educativo actual.</div>
+                                    </div>
+                                    
+                                    <div class="row g-4 mb-4">
+                                        <div class="col-md">
+                                            <div class="education-option text-center selected" data-level="bachiller" onclick="selectEducation(this)">
+                                                <i class="fas fa-user-graduate education-icon text-primary"></i>
+                                                <h5>Bachiller</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md">
+                                            <div class="education-option text-center" data-level="universitario" onclick="selectEducation(this)">
+                                                <i class="fas fa-book-reader education-icon text-success"></i>
+                                                <h5>Universitario</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md">
+                                            <div class="education-option text-center" data-level="recienGraduado" onclick="selectEducation(this)">
+                                                <i class="fas fa-user-tie education-icon text-info"></i>
+                                                <h5>Recién Graduado</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md">
+                                            <div class="education-option text-center" data-level="profesional" onclick="selectEducation(this)">
+                                                <i class="fas fa-briefcase education-icon text-warning"></i>
+                                                <h5>Profesional</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md">
+                                            <div class="education-option text-center" data-level="posgraduado" onclick="selectEducation(this)">
+                                                <i class="fas fa-award education-icon text-danger"></i>
+                                                <h5>Posgraduado</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card bg-light mb-4">
+                                        <div class="card-body">
+                                            <h4>Características del perfil Bachiller:</h4>
+                                            <ul class="mb-0">
+                                                <li>Enfocado en tu potencial más que en experiencia previa</li>
+                                                <li>Destacando tus habilidades personales e intereses</li>
+                                                <li>Oportunidades adaptadas para primer empleo</li>
+                                                <li>Recomendaciones de formación complementaria</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-primary btn-lg px-4" onclick="showDashboard()">
+                                            Continuar con este perfil <i class="fas fa-arrow-right ms-2"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin de primera pestaña -->
+            
+            <!-- Segunda pestaña: Dashboard de perfil -->
+            <div id="dashboard" class="tab-content col-12">
+                <div class="row g-0">
+                    <!-- Barra lateral -->
+                    <div class="col-md-3 col-lg-2">
+                        <div class="sidebar">
+                            <div class="text-center mb-4">
+                                <img src="https://via.placeholder.com/150" alt="Foto de perfil" class="profile-image mb-3">
+                                <h5 class="mb-0">Perfil Bachiller</h5>
+                                <small class="text-muted">Completado al 65%</small>
+                            </div>
+                            
+                            <div class="sidebar-item active" onclick="showSection('dashboardSection')">
+                                <i class="fas fa-th-large me-2"></i> Dashboard
+                            </div>
+                            <div class="sidebar-item" onclick="showSection('personalInfoSection')">
+                                <i class="fas fa-user me-2"></i> Información Personal
+                            </div>
+                            <div class="sidebar-item" onclick="showSection('educationSection')">
+                                <i class="fas fa-graduation-cap me-2"></i> Educación
+                            </div>
+                            <div class="sidebar-item" onclick="showSection('skillsSection')">
+                                <i class="fas fa-certificate me-2"></i> Habilidades
+                            </div>
+                            <div class="sidebar-item" onclick="showSection('jobsSection')">
+                                <i class="fas fa-briefcase me-2"></i> Empleos
+                            </div>
+                            <div class="sidebar-item" onclick="showAnalysis()">
+                                <i class="fas fa-chart-line me-2"></i> Análisis
+                            </div>
+                            <div class="sidebar-item" onclick="showSection('settingsSection')">
+                                <i class="fas fa-cog me-2"></i> Configuración
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contenido principal del dashboard -->
+                    <div class="col-md-9 col-lg-10 p-4">
+                        <h2 class="mb-4"><i class="fas fa-th-large me-2 text-primary"></i>Dashboard de Perfil</h2>
+                        
+                        <div class="alert alert-warning d-flex align-items-center mb-4" role="alert">
+                            <i class="fas fa-exclamation-triangle me-3 fs-4"></i>
+                            <div>Tu perfil está al 65% de completitud. Completa tu educación y habilidades para mejorar tu visibilidad.</div>
+                        </div>
+                        
+                        <div class="row g-4">
+                            <!-- Tarjeta de Educación -->
+                            <div class="col-md-6 col-lg-6">
+                                <div class="dashboard-card h-100">
+                                    <div class="dashboard-card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0"><i class="fas fa-graduation-cap me-2 text-primary"></i>Educación</h5>
+                                        <span class="badge bg-warning text-dark">50% completado</span>
+                                    </div>
+                                    <div class="dashboard-card-body">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Colegio Nacional Mixto</h6>
+                                                <p class="card-text text-muted">Bachillerato - 2020-2023</p>
+                                                <p class="small">Promedio: 8.5/10</p>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary w-100">
+                                            <i class="fas fa-plus me-1"></i> Añadir certificados
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tarjeta de Habilidades -->
+                            <div class="col-md-6 col-lg-6">
+                                <div class="dashboard-card h-100">
+                                    <div class="dashboard-card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0"><i class="fas fa-certificate me-2 text-success"></i>Habilidades</h5>
+                                        <span class="badge bg-warning text-dark">40% completado</span>
+                                    </div>
+                                    <div class="dashboard-card-body">
+                                        <div class="mb-3">
+                                            <span class="badge bg-primary me-1 mb-1 p-2">Trabajo en equipo</span>
+                                            <span class="badge bg-primary me-1 mb-1 p-2">Comunicación</span>
+                                            <span class="badge bg-primary me-1 mb-1 p-2">Ofimática básica</span>
+                                            <span class="badge bg-light text-dark me-1 mb-1 p-2">+3 más</span>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary w-100">
+                                            <i class="fas fa-plus me-1"></i> Añadir habilidades
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tarjeta de Intereses -->
+                            <div class="col-md-6 col-lg-6">
+                                <div class="dashboard-card h-100">
+                                    <div class="dashboard-card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0"><i class="fas fa-bullseye me-2 text-danger"></i>Intereses</h5>
+                                        <span class="badge bg-success">80% completado</span>
+                                    </div>
+                                    <div class="dashboard-card-body">
+                                        <div class="d-flex flex-wrap mb-3">
+                                            <div class="card me-2 mb-2" style="width: 120px;">
+                                                <div class="card-body p-2 text-center">
+                                                    <i class="fas fa-laptop-code mb-2 text-primary fs-4"></i>
+                                                    <p class="mb-0 small">Tecnología</p>
+                                                </div>
+                                            </div>
+                                            <div class="card me-2 mb-2" style="width: 120px;">
+                                                <div class="card-body p-2 text-center">
+                                                    <i class="fas fa-paint-brush mb-2 text-success fs-4"></i>
+                                                    <p class="mb-0 small">Diseño</p>
+                                                </div>
+                                            </div>
+                                            <div class="card me-2 mb-2" style="width: 120px;">
+                                                <div class="card-body p-2 text-center">
+                                                    <i class="fas fa-comments mb-2 text-warning fs-4"></i>
+                                                    <p class="mb-0 small">Marketing</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary w-100">
+                                            <i class="fas fa-edit me-1"></i> Editar intereses
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tarjeta de Empleos sugeridos -->
+                            <div class="col-md-6 col-lg-6">
+                                <div class="dashboard-card h-100">
+                                    <div class="dashboard-card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0"><i class="fas fa-briefcase me-2 text-info"></i>Empleos sugeridos</h5>
+                                        <span class="badge bg-danger">3 nuevos</span>
+                                    </div>
+                                    <div class="dashboard-card-body">
+                                        <div class="list-group mb-3">
+                                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="mb-1">Asistente Administrativo Jr</h6>
+                                                    <p class="mb-0 small text-muted">Empresa XYZ - Remoto</p>
+                                                </div>
+                                                <span class="badge bg-success">Nuevo</span>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="mb-1">Atención al Cliente</h6>
+                                                    <p class="mb-0 small text-muted">Empresa ABC - Híbrido</p>
+                                                </div>
+                                                <span class="badge bg-success">Nuevo</span>
+                                            </a>
+                                        </div>
+                                        <button class="btn btn-sm btn-primary w-100">
+                                            <i class="fas fa-eye me-1"></i> Ver todas las oportunidades
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin de segunda pestaña -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Selección de nivel educativo
+        function selectEducation(element) {
+            // Remover la clase selected de todos los elementos
+            document.querySelectorAll('.education-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Añadir la clase selected al elemento clickeado
+            element.classList.add('selected');
+            
+            // Actualizar el texto de características según el nivel seleccionado
+            const level = element.getAttribute('data-level');
+            const characteristicsElement = document.querySelector('.card.bg-light .card-body');
+            
+            let characteristics = "";
+            switch(level) {
+                case "bachiller":
+                    characteristics = `
+                        <h4>Características del perfil Bachiller:</h4>
+                        <ul class="mb-0">
+                            <li>Enfocado en tu potencial más que en experiencia previa</li>
+                            <li>Destacando tus habilidades personales e intereses</li>
+                            <li>Oportunidades adaptadas para primer empleo</li>
+                            <li>Recomendaciones de formación complementaria</li>
+                        </ul>
+                    `;
+                    break;
+                case "universitario":
+                    characteristics = `
+                        <h4>Características del perfil Universitario:</h4>
+                        <ul class="mb-0">
+                            <li>Enfocado en tus estudios actuales y proyección</li>
+                            <li>Oportunidades de pasantías y prácticas profesionales</li>
+                            <li>Conexión con empresas que buscan talento joven</li>
+                            <li>Complementos formativos para tu carrera</li>
+                        </ul>
+                    `;
+                    break;
+                case "recienGraduado":
+                    characteristics = `
+                        <h4>Características del perfil Recién Graduado:</h4>
+                        <ul class="mb-0">
+                            <li>Enfocado en tu primera experiencia profesional</li>
+                            <li>Destacando tu formación académica reciente</li>
+                            <li>Programas de trainee y desarrollo profesional</li>
+                            <li>Consejos para entrevistas y procesos de selección</li>
+                        </ul>
+                    `;
+                    break;
+                case "profesional":
+                    characteristics = `
+                        <h4>Características del perfil Profesional:</h4>
+                        <ul class="mb-0">
+                            <li>Enfocado en tu experiencia laboral y logros</li>
+                            <li>Oportunidades de crecimiento y cambio profesional</li>
+                            <li>Networking con otros profesionales del sector</li>
+                            <li>Formación especializada y actualización</li>
+                        </ul>
+                    `;
+                    break;
+                case "posgraduado":
+                    characteristics = `
+                        <h4>Características del perfil Posgraduado:</h4>
+                        <ul class="mb-0">
+                            <li>Enfocado en tu especialización y conocimiento avanzado</li>
+                            <li>Oportunidades de liderazgo y dirección</li>
+                            <li>Posiciones de consultoría y asesoría</li>
+                            <li>Reconocimiento como experto en tu campo</li>
+                        </ul>
+                    `;
+                    break;
+            }
+            
+            characteristicsElement.innerHTML = characteristics;
+        }
+        
+        // Mostrar dashboard
+        function showDashboard() {
+            // Ocultar la pestaña de configuración de perfil
+            document.getElementById('profileSetup').classList.remove('active');
+            
+            // Mostrar la pestaña de dashboard
+            document.getElementById('dashboard').classList.add('active');
+        }
+        
+        // Mostrar secciones dentro del dashboard
+        function showSection(sectionId) {
+            // En una implementación real, aquí mostraríamos diferentes secciones
+            console.log(`Mostrando sección: ${sectionId}`);
+        }
+        
+        // Función para mostrar la página de análisis
+        function showAnalysis() {
+            // Redirigir a la página de análisis
+            window.location.href = "prototipo_analisis.html";
+        }
+    </script>
+</body>
+</html> 

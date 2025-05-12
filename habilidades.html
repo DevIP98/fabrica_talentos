@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fábrica de Talentos - Habilidades</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="menu_lateral.css">
+    <style>
+        .skill-level {
+            width: 100%;
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .skill-badge {
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            transition: all 0.2s ease;
+        }
+        
+        .skill-badge:hover {
+            background-color: #e9ecef;
+        }
+        
+        .skill-category {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+        }
+        
+        .skill-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 15px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            background-color: #e9ecef;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .skill-tag.selected {
+            background-color: #0d6efd;
+            color: white;
+        }
+        
+        .skill-tag:hover:not(.selected) {
+            background-color: #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-industry me-2"></i>Fábrica de Talentos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-question-circle me-1"></i> Ayuda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-bell me-1"></i> Notificaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user-circle me-1"></i> Mi Cuenta</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container-fluid">
+        <div class="row g-0">
+            <!-- Barra lateral -->
+            <div class="col-md-3 col-lg-2">
+                <div class="sidebar">
+                    <div class="text-center mb-4">
+                        <img src="https://via.placeholder.com/150" alt="Foto de perfil" class="profile-image mb-3">
+                        <h5 class="mb-0">Perfil Bachiller</h5>
+                        <small class="text-muted">Completado al 65%</small>
+                    </div>
+                    
+                    <a href="prototipo_dashboard.html" class="sidebar-item">
+                        <i class="fas fa-th-large"></i> Dashboard
+                    </a>
+                    <a href="informacion_personal.html" class="sidebar-item">
+                        <i class="fas fa-user"></i> Información Personal
+                    </a>
+                    <a href="educacion.html" class="sidebar-item">
+                        <i class="fas fa-graduation-cap"></i> Educación
+                    </a>
+                    <a href="habilidades.html" class="sidebar-item active">
+                        <i class="fas fa-certificate"></i> Habilidades
+                    </a>
+                    <a href="empleos.html" class="sidebar-item">
+                        <i class="fas fa-briefcase"></i> Empleos
+                    </a>
+                    <a href="prototipo_analisis.html" class="sidebar-item">
+                        <i class="fas fa-chart-line"></i> Análisis
+                    </a>
+                    <a href="configuracion.html" class="sidebar-item">
+                        <i class="fas fa-cog"></i> Configuración
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Contenido principal -->
+            <div class="col-md-9 col-lg-10 p-4">
+                <h2 class="page-header"><i class="fas fa-certificate me-2 text-primary"></i>Habilidades</h2>
+                
+                <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+                    <i class="fas fa-info-circle me-3 fs-4"></i>
+                    <div>Las habilidades destacadas en tu perfil aumentan un 40% tus posibilidades de ser contactado. Añade tus fortalezas para destacar entre los demás.</div>
+                </div>
+                
+                <div class="row">
+                    <!-- Habilidades técnicas -->
+                    <div class="col-md-6 mb-4">
+                        <div class="dashboard-card h-100">
+                            <div class="dashboard-card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0"><i class="fas fa-laptop-code me-2 text-primary"></i>Habilidades técnicas</h5>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#agregarHabilidadModal">
+                                    <i class="fas fa-plus me-1"></i> Añadir
+                                </button>
+                            </div>
+                            <div class="dashboard-card-body">
+                                <div class="skill-badge">
+                                    <div>
+                                        <h6 class="mb-0">Microsoft Office</h6>
+                                        <div class="skill-level">
+                                            <div class="skill-progress bg-success" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-badge">
+                                    <div>
+                                        <h6 class="mb-0">Canva</h6>
+                                        <div class="skill-level">
+                                            <div class="skill-progress bg-success" style="width: 75%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-badge">
+                                    <div>
+                                        <h6 class="mb-0">Excel</h6>
+                                        <div class="skill-level">
+                                            <div class="skill-progress bg-warning" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-badge">
+                                    <div>
+                                        <h6 class="mb-0">Google Drive</h6>
+                                        <div class="skill-level">
+                                            <div class="skill-progress bg-success" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Habilidades blandas -->
+                    <div class="col-md-6 mb-4">
+                        <div class="dashboard-card h-100">
+                            <div class="dashboard-card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0"><i class="fas fa-users me-2 text-success"></i>Habilidades blandas</h5>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#agregarHabilidadModal">
+                                    <i class="fas fa-plus me-1"></i> Añadir
+                                </button>
+                            </div>
+                            <div class="dashboard-card-body">
+                                <div class="skill-badge">
+                                    <div>
+                                        <h6 class="mb-0">Trabajo en equipo</h6>
+                                        <div class="skill-level">
+                                            <div class="skill-progress bg-success" style="width: 90%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-badge">
+                                    <div>
+                                        <h6 class="mb-0">Comunicación</h6>
+                                        <div class="skill-level">
+                                            <div class="skill-progress bg-success" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-badge">
+                                    <div>
+                                        <h6 class="mb-0">Resolución de problemas</h6>
+                                        <div class="skill-level">
+                                            <div class="skill-progress bg-warning" style="width: 70%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-badge">
+                                    <div>
+                                        <h6 class="mb-0">Adaptabilidad</h6>
+                                        <div class="skill-level">
+                                            <div class="skill-progress bg-success" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Intereses -->
+                    <div class="col-md-12">
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header">
+                                <h5 class="mb-0"><i class="fas fa-heart me-2 text-danger"></i>Intereses profesionales</h5>
+                            </div>
+                            <div class="dashboard-card-body">
+                                <p class="text-muted mb-3">Selecciona las áreas profesionales que te interesan:</p>
+                                
+                                <div class="skill-category mb-4">
+                                    <h6 class="mb-3">Tecnología</h6>
+                                    <div>
+                                        <span class="skill-tag selected" onclick="toggleSkillTag(this)">Desarrollo web</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Programación</span>
+                                        <span class="skill-tag selected" onclick="toggleSkillTag(this)">Diseño digital</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Análisis de datos</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Ciberseguridad</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Redes</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Soporte técnico</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-category mb-4">
+                                    <h6 class="mb-3">Administración y negocios</h6>
+                                    <div>
+                                        <span class="skill-tag selected" onclick="toggleSkillTag(this)">Atención al cliente</span>
+                                        <span class="skill-tag selected" onclick="toggleSkillTag(this)">Marketing</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Ventas</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Recursos humanos</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Contabilidad</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Finanzas</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Administración</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-category">
+                                    <h6 class="mb-3">Otros sectores</h6>
+                                    <div>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Educación</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Salud</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Artes y diseño</span>
+                                        <span class="skill-tag selected" onclick="toggleSkillTag(this)">Comunicación</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Turismo</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Logística</span>
+                                        <span class="skill-tag" onclick="toggleSkillTag(this)">Construcción</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-end mt-3">
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-save me-2"></i>Guardar cambios
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para agregar habilidad -->
+    <div class="modal fade" id="agregarHabilidadModal" tabindex="-1" aria-labelledby="agregarHabilidadModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarHabilidadModalLabel">Añadir habilidad</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="tipoHabilidad" class="form-label">Tipo de habilidad</label>
+                            <select class="form-select" id="tipoHabilidad" required>
+                                <option value="" selected disabled>Selecciona un tipo</option>
+                                <option value="tecnica">Técnica</option>
+                                <option value="blanda">Blanda</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="nombreHabilidad" class="form-label">Nombre de la habilidad</label>
+                            <input type="text" class="form-control" id="nombreHabilidad" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="nivelHabilidad" class="form-label">Nivel de dominio</label>
+                            <div class="d-flex align-items-center">
+                                <input type="range" class="form-range me-2" min="1" max="5" id="nivelHabilidad" value="3">
+                                <span id="nivelTexto">Intermedio</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="descripcionHabilidad" class="form-label">Descripción (opcional)</label>
+                            <textarea class="form-control" id="descripcionHabilidad" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleSkillTag(element) {
+            element.classList.toggle('selected');
+        }
+        
+        // Actualizar texto del nivel de habilidad
+        document.getElementById('nivelHabilidad').addEventListener('input', function() {
+            const valor = this.value;
+            let texto = 'Básico';
+            
+            if (valor == 1) texto = 'Principiante';
+            else if (valor == 2) texto = 'Básico';
+            else if (valor == 3) texto = 'Intermedio';
+            else if (valor == 4) texto = 'Avanzado';
+            else if (valor == 5) texto = 'Experto';
+            
+            document.getElementById('nivelTexto').textContent = texto;
+        });
+    </script>
+</body>
+</html> 

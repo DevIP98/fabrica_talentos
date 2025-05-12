@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fábrica de Talentos - Educación</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="menu_lateral.css">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-industry me-2"></i>Fábrica de Talentos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-question-circle me-1"></i> Ayuda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-bell me-1"></i> Notificaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user-circle me-1"></i> Mi Cuenta</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container-fluid">
+        <div class="row g-0">
+            <!-- Barra lateral -->
+            <div class="col-md-3 col-lg-2">
+                <div class="sidebar">
+                    <div class="text-center mb-4">
+                        <img src="https://via.placeholder.com/150" alt="Foto de perfil" class="profile-image mb-3">
+                        <h5 class="mb-0">Perfil Bachiller</h5>
+                        <small class="text-muted">Completado al 65%</small>
+                    </div>
+                    
+                    <a href="prototipo_dashboard.html" class="sidebar-item">
+                        <i class="fas fa-th-large"></i> Dashboard
+                    </a>
+                    <a href="informacion_personal.html" class="sidebar-item">
+                        <i class="fas fa-user"></i> Información Personal
+                    </a>
+                    <a href="educacion.html" class="sidebar-item active">
+                        <i class="fas fa-graduation-cap"></i> Educación
+                    </a>
+                    <a href="habilidades.html" class="sidebar-item">
+                        <i class="fas fa-certificate"></i> Habilidades
+                    </a>
+                    <a href="empleos.html" class="sidebar-item">
+                        <i class="fas fa-briefcase"></i> Empleos
+                    </a>
+                    <a href="prototipo_analisis.html" class="sidebar-item">
+                        <i class="fas fa-chart-line"></i> Análisis
+                    </a>
+                    <a href="configuracion.html" class="sidebar-item">
+                        <i class="fas fa-cog"></i> Configuración
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Contenido principal -->
+            <div class="col-md-9 col-lg-10 p-4">
+                <h2 class="page-header"><i class="fas fa-graduation-cap me-2 text-primary"></i>Educación</h2>
+                
+                <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+                    <i class="fas fa-info-circle me-3 fs-4"></i>
+                    <div>Tu formación académica es un factor importante para los reclutadores. Completa tu información educativa y añade certificados para destacar.</div>
+                </div>
+                
+                <!-- Educación formal -->
+                <div class="dashboard-card mb-4">
+                    <div class="dashboard-card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Educación formal</h5>
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#agregarEducacionModal">
+                            <i class="fas fa-plus me-1"></i> Añadir
+                        </button>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="card-title mb-0">Bachillerato</h5>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-1">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h6 class="card-subtitle mb-2 text-muted">Colegio Nacional Mixto</h6>
+                                <p class="card-text">
+                                    <i class="fas fa-calendar-alt me-2"></i> 2020 - 2023<br>
+                                    <i class="fas fa-map-marker-alt me-2"></i> Bogotá, Colombia<br>
+                                    <i class="fas fa-star me-2"></i> Promedio: 8.5/10
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Certificados y cursos -->
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Certificados y cursos</h5>
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#agregarCertificadoModal">
+                            <i class="fas fa-plus me-1"></i> Añadir
+                        </button>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="card-title mb-0">Introducción a Office 365</h5>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-1">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h6 class="card-subtitle mb-2 text-muted">Microsoft Learn</h6>
+                                <p class="card-text">
+                                    <i class="fas fa-calendar-alt me-2"></i> Agosto 2023<br>
+                                    <span class="badge bg-success">Verificado</span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="card-title mb-0">Comunicación efectiva</h5>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-1">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h6 class="card-subtitle mb-2 text-muted">Centro de formación comunitaria</h6>
+                                <p class="card-text">
+                                    <i class="fas fa-calendar-alt me-2"></i> Mayo 2023<br>
+                                    <span class="badge bg-warning text-dark">Pendiente de verificación</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para agregar educación -->
+    <div class="modal fade" id="agregarEducacionModal" tabindex="-1" aria-labelledby="agregarEducacionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarEducacionModalLabel">Añadir educación formal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nivelEducativo" class="form-label">Nivel educativo</label>
+                            <select class="form-select" id="nivelEducativo" required>
+                                <option value="" selected disabled>Selecciona un nivel educativo</option>
+                                <option value="secundaria">Secundaria / Bachillerato</option>
+                                <option value="tecnico">Técnico</option>
+                                <option value="tecnologico">Tecnológico</option>
+                                <option value="universitario">Universitario</option>
+                                <option value="especializacion">Especialización</option>
+                                <option value="maestria">Maestría</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="institucion" class="form-label">Institución</label>
+                            <input type="text" class="form-control" id="institucion" required>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="fechaInicio" class="form-label">Fecha de inicio</label>
+                                <input type="month" class="form-control" id="fechaInicio" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="fechaFin" class="form-label">Fecha de finalización</label>
+                                <input type="month" class="form-control" id="fechaFin">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="enCurso">
+                                    <label class="form-check-label" for="enCurso">
+                                        Actualmente estudiando
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="ubicacionInstitucion" class="form-label">Ubicación</label>
+                            <input type="text" class="form-control" id="ubicacionInstitucion">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="promedio" class="form-label">Promedio</label>
+                            <input type="text" class="form-control" id="promedio">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para agregar certificado -->
+    <div class="modal fade" id="agregarCertificadoModal" tabindex="-1" aria-labelledby="agregarCertificadoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarCertificadoModalLabel">Añadir certificado o curso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombreCertificado" class="form-label">Nombre del certificado o curso</label>
+                            <input type="text" class="form-control" id="nombreCertificado" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="organizacion" class="form-label">Organización emisora</label>
+                            <input type="text" class="form-control" id="organizacion" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="fechaEmision" class="form-label">Fecha de emisión</label>
+                            <input type="month" class="form-control" id="fechaEmision" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="credencialID" class="form-label">ID de credencial (opcional)</label>
+                            <input type="text" class="form-control" id="credencialID">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="urlCertificado" class="form-label">URL del certificado (opcional)</label>
+                            <input type="url" class="form-control" id="urlCertificado">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="archivoCertificado" class="form-label">Subir certificado</label>
+                            <input class="form-control" type="file" id="archivoCertificado">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="descripcionCertificado" class="form-label">Descripción (opcional)</label>
+                            <textarea class="form-control" id="descripcionCertificado" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
